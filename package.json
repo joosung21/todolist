@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/joosung21/todolist/issues"
   },
-  "homepage": "https://github.com/joosung21/todolist#readme"
+  "homepage": "https://github.com/joosung21/todolist#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
 }
