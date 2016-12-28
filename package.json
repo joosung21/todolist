@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/joosung21/todolist#readme",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "mysql": "^2.12.0"
   }
 }
