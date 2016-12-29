@@ -1,2 +1,2 @@
 # todolist
-test project
+Test project using nodejs, express, mysql, and pug.
