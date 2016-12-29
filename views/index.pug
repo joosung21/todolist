@@ -1,3 +1,41 @@
 doctype
-head
-body= tasks[0].title
+<!--[if IE 8]>
+  <html lang="en" class="ie8 no-js">
+<![endif]-->
+<!--[if IE 9]>
+  <html lang="en" class="ie9 no-js">
+<![endif]-->
+html(lang="en")
+  <!--<![endif]-->
+  head
+    meta(charset="utf-8")
+    title todolist
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(content='width=device-width, initial-scale=1', name='viewport')
+    //- GLOBAL MANDATORY STYLES
+    link(href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all', rel='stylesheet', type='text/css')
+    link(href='../assets/global/plugins/font-awesome/css/font-awesome.min.css', rel='stylesheet', type='text/css')
+    link(href='../assets/global/plugins/simple-line-icons/simple-line-icons.min.css', rel='stylesheet', type='text/css')
+    link(href='../assets/global/plugins/bootstrap/css/bootstrap.min.css', rel='stylesheet', type='text/css')
+    link(href='../assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css', rel='stylesheet', type='text/css')
+    //- THEME GLOBAL STYLES
+    link#style_components(href='../assets/global/css/components.min.css', rel='stylesheet', type='text/css')
+    link(href='../assets/global/css/plugins.min.css', rel='stylesheet', type='text/css')
+    //- THEME LAYOUT STYLES
+    link(href='../assets/layouts/layout/css/layout.min.css', rel='stylesheet', type='text/css')
+    link#style_color(href='../assets/layouts/layout/css/themes/darkblue.min.css', rel='stylesheet', type='text/css')
+    link(href='../assets/layouts/layout/css/custom.min.css', rel='stylesheet', type='text/css')
+  body.page-header-fixed.page-sidebar-closed-hide-logo.page-content-white
+    .page-wrapper
+        //- HEADER
+        .page-header.navbar.navbar-fixed-top
+          //- HEADER INNER
+          .page-header-inner
+            //- LOGO
+            .page-logo
+              a(href="/")
+                img(src="../assets/layouts/layout/img/logo.png", alt="logo", class="logo-default")
+
+
+
+//- body= tasks[0].title

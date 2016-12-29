@@ -15,10 +15,12 @@ connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
   console.log('The solution is: ', rows[0].solution)
 });
 app.set('views', './views')
+app.use('/', express.static('public'))
 app.set('view engine', 'pug')
 app.use(bodyParser.json())
+app.locals.pretty = true
 
-app.get('/todolist', function (req, res) {
+app.get('/', function (req, res) {
   var sql = 'SELECT title FROM tasks';
   connection.query(sql, function(err, rows, fields){
     if (err) throw err
@@ -27,5 +29,5 @@ app.get('/todolist', function (req, res) {
 })
 
 app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
+  console.log('todolist app listening on port 3000!')
 })
