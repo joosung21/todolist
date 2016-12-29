@@ -14,6 +14,7 @@ html(lang="en")
     meta(content='width=device-width, initial-scale=1', name='viewport')
     //- GLOBAL MANDATORY STYLES
     link(href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all', rel='stylesheet', type='text/css')
+    link(href='http://fonts.googleapis.com/earlyaccess/nanumgothic.css', rel='stylesheet', type='text/css')
     link(href='../assets/global/plugins/font-awesome/css/font-awesome.min.css', rel='stylesheet', type='text/css')
     link(href='../assets/global/plugins/simple-line-icons/simple-line-icons.min.css', rel='stylesheet', type='text/css')
     link(href='../assets/global/plugins/bootstrap/css/bootstrap.min.css', rel='stylesheet', type='text/css')
@@ -35,7 +36,70 @@ html(lang="en")
             .page-logo
               a(href="/")
                 img(src="../assets/layouts/layout/img/logo.png", alt="logo", class="logo-default")
+              .menu-toggler.sidebar-toggler
+                span
+            //- RESPONSIVE MENU TOGGLER
+            a.menu-toggler.responsive-toggler(href='javascript:;', data-toggle='collapse', data-target='.navbar-collapse')
+              span
+        //- HEADER & CONTENT DIVIDER
+        .clearfix
+        //- CONTAINER
+        .page-container
+          //- SIDEBAR
+          .page-sidebar-wrapper
+            .page-sidebar.navbar-collapse.collapse
+              //- SIDEBAR MENU
+              ul.page-sidebar-menu.page-header-fixed(data-keep-expanded='false', data-auto-scroll='true', data-slide-speed='200', style='padding-top: 20px')
+                //- SIDEBAR TOGGLER BUTTON
+                li.sidebar-toggler-wrapper.hide
+                  .sidebar-toggler
+                    span
+                //- SAY HELLO
+                li.heading
+                  h3.uppercase 안녕하세요 제이!
+                //- TASK MANAGEMENT MENU
+                li.nav-item.start.active.open
+                  a.nav-link.nav-toggle(href='javascript:;')
+                    i.icon-docs
+                    span.title 업무관리
+                    span.arrow
+                  ul.sub-menu
+                    li.nav-item
+                      a.nav-link(href='app_todo')
+                        i.icon-check
+                        span.title 할일목록
+          //- CONTENT
+          .page-content-wrapper
+            //- CONTENT BODY
+            .page-content
+              //- PAGE TITLE
+              h1.page-title
+                | 할일목록
+                //- small blank page layout
 
+    //- FOOTER
+    .page-footer
+      .page-footer-inner
+        | 2017 © WebApp by Jay Ahn
+        a(target='_blank', href='http://www.tport.io') T PORT INC.
+      .scroll-to-top
+        i.icon-arrow-up
 
-
-//- body= tasks[0].title
+    <!--[if lt IE 9]>
+    <script src="../assets/global/plugins/respond.min.js"></script>
+    <script src="../assets/global/plugins/excanvas.min.js"></script>
+    <script src="../assets/global/plugins/ie8.fix.min.js"></script>
+    <![endif]-->
+    //- CORE PLUGINS
+    script(src='../assets/global/plugins/jquery.min.js', type='text/javascript')
+    script(src='../assets/global/plugins/bootstrap/js/bootstrap.min.js', type='text/javascript')
+    script(src='../assets/global/plugins/js.cookie.min.js', type='text/javascript')
+    script(src='../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js', type='text/javascript')
+    script(src='../assets/global/plugins/jquery.blockui.min.js', type='text/javascript')
+    script(src='../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js', type='text/javascript')
+    //- THEME GLOBAL SCRIPTS
+    script(src='../assets/global/scripts/app.min.js', type='text/javascript')
+    //- BEGIN THEME LAYOUT SCRIPTS
+    script(src='../assets/layouts/layout/scripts/layout.min.js', type='text/javascript')
+    script(src='../assets/layouts/global/scripts/quick-sidebar.min.js', type='text/javascript')
+    script(src='../assets/layouts/global/scripts/quick-nav.min.js', type='text/javascript')
