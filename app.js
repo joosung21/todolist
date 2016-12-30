@@ -15,6 +15,7 @@ connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
   console.log('The solution is: ', rows[0].solution)
 });
 app.set('views', './views')
+app.use('/assets', express.static('assets'))
 app.use('/', express.static('public'))
 app.set('view engine', 'pug')
 app.use(bodyParser.json())
