@@ -21,11 +21,11 @@ app.set('view engine', 'pug')
 app.use(bodyParser.json())
 app.locals.pretty = true
 
-app.get('/', function (req, res) {
+app.get('/app_todo', function (req, res) {
   var sql = 'SELECT title FROM tasks';
   connection.query(sql, function(err, rows, fields){
     if (err) throw err
-    res.render('index', {tasks:rows})
+    res.render('todo', {tasks:rows})
   })
 })
 

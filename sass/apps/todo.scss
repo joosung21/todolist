@@ -54,7 +54,7 @@ NEW TODO Page
 				content: "";
 				margin:0;
 			}
-			
+
 		}
 	}
 }
@@ -390,7 +390,7 @@ NEW TODO Page
 
 
 /* RESPONSIVE MODE */
-@media (max-width: $screen-md-max) { 
+@media (max-width: $screen-md-max) {
 
 	.todo-head{
 
@@ -408,7 +408,7 @@ NEW TODO Page
 	#todo-task-modal{
 
 		>.modal-dialog{
-			width: 95%;	
+			width: 95%;
 		}
 	}
 
@@ -445,3 +445,7 @@ NEW TODO Page
 		}
 	}
 }
+
+// .page-content{
+// 	background-color: #eef1f5;
+// }
