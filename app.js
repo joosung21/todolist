@@ -14,6 +14,8 @@ connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
   if (err) throw err
   console.log('The solution is: ', rows[0].solution)
 });
+app.locals.moment = require('moment');
+
 app.set('views', './views')
 app.use('/assets', express.static('assets'))
 app.use('/', express.static('public'))
@@ -25,7 +27,7 @@ app.get('/app_todo', function (req, res) {
   var sql = 'SELECT title FROM tasks';
   connection.query(sql, function(err, rows, fields){
     if (err) throw err
-    res.render('todo', {tasks:rows})
+    res.render('todo', {tasks: rows})
   })
 })
 

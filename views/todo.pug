@@ -111,7 +111,7 @@ html(lang="en")
                   .col-md-7
                     .todo-tasks-container
                       .todo-head
-                        button.btn.btn-square.btn-sm.red.todo-bold(data-toggle='modal', href='#todo-task-modal')  ToDo 추가
+                        button.btn.btn-square.btn-sm.red.todo-bold(data-toggle='modal', href='#todo-task-modal') ToDo 추가
                         h3
                           span.todo-grey 할 일 목록:
                           |  티몬 외부회계감사
@@ -121,16 +121,10 @@ html(lang="en")
                       ul.todo-tasks-content
                         li.todo-tasks-item
                           h4.todo-inline
-                            a(data-toggle='modal', href='#todo-task-modal') 티포트 금융기간 조회서 발급받기
+                            a(data-toggle='modal', href='#todo-task-modal')= tasks[0].title
                           p.todo-inline.todo-float-r
-                            | Jay,
-                            span.todo-red 오늘
-                        li.todo-tasks-item
-                          h4.todo-inline
-                            a(data-toggle='modal', href='#todo-task-modal') 계좌별 원장 다운로드 받기
-                          p.todo-inline.todo-float-r
-                            | Jay,
-                            span.todo-green 1월2일
+                            - var due = tasks[0].duedate
+                            span.todo-green #{moment(due).format('M')}월 #{moment(due).format('D')}일
               //- TASK MODAL
               #todo-task-modal.modal.fade(role='dialog', aria-labelledby='myModalLabel10', aria-hidden='true')
                 .modal-dialog
@@ -156,20 +150,20 @@ html(lang="en")
                         |  요청서.jpg
                         i.fa.fa-times.todo-remove-file
                     //- CHAT PORTLET
-                    .portlet.light
-                      .portlet-title
-                        .caption
-                          i.icon-bubble.font-hide.hide
-                          span.caption-subject.font-hide.bold.uppercase 대화
-                        //- CHAT SEARCH
-                        .actions
-                          .portlet-input.input-inline
-                            .input-icon.right
-                              i.icon-magnifier
-                              input.form-control.input-circle(type='text', placeholder='search...')
-                      #chats.portlet-body
-                        .scroller(style='height: 525px;', data-always-visible='1', data-rail-visible1='1')
-                          ul.chats
+                    //- .portlet.light
+                    //-   .portlet-title
+                    //-     .caption
+                    //-       i.icon-bubble.font-hide.hide
+                    //-       span.caption-subject.font-hide.bold.uppercase 대화
+                    //-     //- CHAT SEARCH
+                    //-     .actions
+                    //-       .portlet-input.input-inline
+                    //-         .input-icon.right
+                    //-           i.icon-magnifier
+                    //-           input.form-control.input-circle(type='text', placeholder='search...')
+                    //-   #chats.portlet-body
+                    //-     .scroller(style='height: 525px;', data-always-visible='1', data-rail-visible1='1')
+                    //-       ul.chats
                             //- li.out
                             //-   img.avatar(alt='', src='../assets/layouts/layout/img/avatar2.jpg')
                             //-   .message
@@ -252,8 +246,15 @@ html(lang="en")
     script(src='../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js', type='text/javascript')
     script(src='../assets/global/plugins/jquery.blockui.min.js', type='text/javascript')
     script(src='../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js', type='text/javascript')
+    //- BEGIN PAGE LEVEL PLUGINS
+    script(src='../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js', type='text/javascript')
+    script(src='../assets/global/plugins/select2/js/select2.full.min.js', type='text/javascript')
+    script(src='../assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js', type='text/javascript')
     //- THEME GLOBAL SCRIPTS
     script(src='../assets/global/scripts/app.min.js', type='text/javascript')
+    //- BEGIN PAGE LEVEL SCRIPTS
+    script(src='../assets/apps/scripts/todo.min.js', type='text/javascript')
+    script(src='../assets/pages/scripts/components-date-time-pickers.min.js', type='text/javascript')
     //- BEGIN THEME LAYOUT SCRIPTS
     script(src='../assets/layouts/layout/scripts/layout.min.js', type='text/javascript')
     script(src='../assets/layouts/global/scripts/quick-sidebar.min.js', type='text/javascript')
