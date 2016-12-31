@@ -14,7 +14,7 @@ html(lang="en")
     meta(content='width=device-width, initial-scale=1', name='viewport')
     //- GLOBAL MANDATORY STYLES
     link(href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all', rel='stylesheet', type='text/css')
-    link(href='/assets/global/plugins/font-awesome/css/font-awesome.min.css', rel='stylesheet', type='text/css')
+    link(href='../assets/global/plugins/font-awesome/css/font-awesome.min.css', rel='stylesheet', type='text/css')
     link(href='../assets/global/plugins/simple-line-icons/simple-line-icons.min.css', rel='stylesheet', type='text/css')
     link(href='../assets/global/plugins/bootstrap/css/bootstrap.min.css', rel='stylesheet', type='text/css')
     link(href='../assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css', rel='stylesheet', type='text/css')
@@ -22,7 +22,6 @@ html(lang="en")
     link(href='../assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css', rel='stylesheet', type='text/css')
     link(href='../assets/global/plugins/select2/css/select2.min.css', rel='stylesheet', type='text/css')
     link(href='../assets/global/plugins/select2/css/select2-bootstrap.min.css', rel='stylesheet', type='text/css')
-    link(href='../assets/global/plugins/jquery-multi-select/css/multi-select.css', rel='stylesheet', type='text/css')
     //- THEME GLOBAL STYLES
     link#style_components(href='../assets/global/css/components.min.css', rel='stylesheet', type='text/css')
     link(href='../assets/global/css/plugins.min.css', rel='stylesheet', type='text/css')
@@ -67,165 +66,22 @@ html(lang="en")
                 //- TASK MANAGEMENT MENU
                 li.nav-item.start.active.open
                   a.nav-link.nav-toggle(href='javascript:;')
-                    i.icon-docs
-                    span.title 업무관리
-                    span.arrow
-                  ul.sub-menu
-                    li.nav-item
+                    i.icon-check
+                    span.title ToDo
+                    span.selected
+                    //- span.arrow
+                  //- ul.sub-menu
+                    li.nav-item.active
                       a.nav-link(href='app_todo')
                         i.icon-check
                         span.title ToDo
+                        span.selected
           //- CONTENT
           .page-content-wrapper
             //- CONTENT BODY
             .page-content
-              .todo-main-header
-                h3 ToDo App
-                //- ul.todo-breadcrumb
-                //-   li
-                //-     a(href='javascrip:;') Home
-                //-   li
-                //-     a(href='javascrip:;') Extra
-                //-   li
-                //-     a.todo-active(href='javascrip:;') Todo
-              .todo-container
-                .row
-                  .col-md-5
-                    ul.todo-projects-container
-                      li.todo-padding-b-0
-                        .todo-head
-                          button.btn.btn-square.btn-sm.green.todo-bold 프로젝트 추가
-                          h3 Projects
-                          p 현재 진행중인 프로젝트들 입니다
-                      li.todo-projects-item
-                        h3 티몬 외부회계감사
-                        p
-                          | 티몬이 외부회계감사를 받고 있습니다. 도움이 필요합니다!
-                        .todo-project-item-foot
-                          p.todo-red.todo-inline 17 개의 할 일이 있습니다.
-                          p.todo-inline.todo-float-r
-                            | 16 Members
-                            a.todo-add-button(href='#todo-members-modal', data-toggle='modal') +
-                      //- .todo-projects-divider
-                  //- ToDo List
-                  .col-md-7
-                    .todo-tasks-container
-                      .todo-head
-                        button.btn.btn-square.btn-sm.red.todo-bold(data-toggle='modal', href='#todo-task-modal') ToDo 추가
-                        h3
-                          span.todo-grey 할 일 목록:
-                          |  티몬 외부회계감사
-                        p.todo-inline
-                          | 16 Members
-                          a.todo-add-button(href='#todo-members-modal', data-toggle='modal') +
-                      ul.todo-tasks-content
-                        li.todo-tasks-item
-                          h4.todo-inline
-                            a(data-toggle='modal', href='#todo-task-modal')= tasks[0].title
-                          p.todo-inline.todo-float-r
-                            - var due = tasks[0].duedate
-                            span.todo-green #{moment(due).format('M')}월 #{moment(due).format('D')}일
-              //- TASK MODAL
-              #todo-task-modal.modal.fade(role='dialog', aria-labelledby='myModalLabel10', aria-hidden='true')
-                .modal-dialog
-                  .modal-content.scroller(style='height: 100%;', data-always-visible='1', data-rail-visible='0')
-                    .modal-header
-                      button.close(type='button', data-dismiss='modal', aria-hidden='true')
-                      button.btn.btn-square.btn-sm.green.todo-bold.todo-inline 완료된 업무
-                      p.todo-task-modal-title.todo-inline
-                        | DUE:
-                        input.form-control.input-inline.input-medium.date-picker.todo-task-due.todo-inline(size='16', type='text', value='10/01/2015')
-                      p.todo-task-modal-title.todo-inline
-                        | 담당자:
-                        a.todo-inline.todo-task-assign(href='#todo-members-modal', data-toggle='modal') Jay
-                    .modal-body.todo-task-modal-body
-                      h3.todo-task-modal-bg 계좌별 원장 다운로드 받기
-                      p.todo-task-modal-bg
-                        | 자세한 내용
-                      h4
-                        | 첨부파일
-                        a.todo-add-button(href='javascrip:;') +
-                      p.todo-task-file
-                        i.fa.fa-file-o.todo-grey
-                        |  요청서.jpg
-                        i.fa.fa-times.todo-remove-file
-                    //- CHAT PORTLET
-                    //- .portlet.light
-                    //-   .portlet-title
-                    //-     .caption
-                    //-       i.icon-bubble.font-hide.hide
-                    //-       span.caption-subject.font-hide.bold.uppercase 대화
-                    //-     //- CHAT SEARCH
-                    //-     .actions
-                    //-       .portlet-input.input-inline
-                    //-         .input-icon.right
-                    //-           i.icon-magnifier
-                    //-           input.form-control.input-circle(type='text', placeholder='search...')
-                    //-   #chats.portlet-body
-                    //-     .scroller(style='height: 525px;', data-always-visible='1', data-rail-visible1='1')
-                    //-       ul.chats
-                            //- li.out
-                            //-   img.avatar(alt='', src='../assets/layouts/layout/img/avatar2.jpg')
-                            //-   .message
-                            //-     span.arrow
-                            //-     a.name(href='javascript:;')  Lisa Wong
-                            //-     span.datetime  at 20:11
-                            //-     span.body
-                            //-       | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                            //- li.in
-                            //-   img.avatar(alt='', src='../assets/layouts/layout/img/avatar1.jpg')
-                            //-   .message
-                            //-     span.arrow
-                            //-     a.name(href='javascript:;')  Bob Nilson
-                            //-     span.datetime  at 20:30
-                            //-     span.body
-                            //-       | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                        .chat-form
-                          .input-cont
-                            input.form-control(type='text', placeholder='메세지를 입력하세요...')
-                          .btn-cont
-                            span.arrow
-                            a.btn.blue.icn-only(href='')
-                              i.fa.fa-check.icon-white
-                    .modal-footer
-                      button.btn.default(data-dismiss='modal', aria-hidden='true') 닫기
-                      button.btn.green(data-dismiss='modal') 저장하기
-              //- MEMBERS MODAL
-              #todo-members-modal.modal.fade(role='dialog', aria-labelledby='myModalLabel10', aria-hidden='true')
-                .modal-dialog
-                  .modal-content
-                    .modal-header
-                      button.close(type='button', data-dismiss='modal', aria-hidden='true')
-                      h4.modal-title 참여할 인원을 선택하세요
-                    .modal-body
-                      form.form-horizontal(action='#', role='form')
-                        .form-group
-                          label.control-label.col-md-4 인간선택
-                          .col-md-8
-                            select#select2_sample2.form-control.select2.select-height(multiple='')
-                              optgroup(label='운영팀')
-                                option Smile
-                                option Jessica
-                                option Chloe
-                                option Steve
-                                option Peter
-                                option Sunny
-                              optgroup(label='개발팀')
-                                option Sean
-                                option Jade
-                                option Jin
-                                option Peter
-                                option Kay
-                                option Eden
-                                option Heroin
-                              optgroup(label='관리팀')
-                                option Kevin
-                                option Hans
-                                option Jay
-                                option Jiho
-                    .modal-footer
-                      button.btn.default(data-dismiss='modal', aria-hidden='true') 닫기
-                      button.btn.green(data-dismiss='modal') 확인
+
+
     //- FOOTER
     .page-footer
       .page-footer-inner
