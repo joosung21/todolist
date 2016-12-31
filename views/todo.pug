@@ -26,7 +26,7 @@ html(lang="en")
     link#style_components(href='../assets/global/css/components.min.css', rel='stylesheet', type='text/css')
     link(href='../assets/global/css/plugins.min.css', rel='stylesheet', type='text/css')
     //- PAGE LEVEL STYLES
-    link(href='../assets/apps/css/todo.min.css', rel='stylesheet', type='text/css')
+    link(href='../assets/apps/css/todo-2.min.css', rel='stylesheet', type='text/css')
     //- THEME LAYOUT STYLES
     link(href='../assets/layouts/layout/css/layout.min.css', rel='stylesheet', type='text/css')
     link#style_color(href='../assets/layouts/layout/css/themes/darkblue.min.css', rel='stylesheet', type='text/css')
@@ -80,8 +80,54 @@ html(lang="en")
           .page-content-wrapper
             //- CONTENT BODY
             .page-content
+              //- ToDo CONTENT
+              .todo-content
+                .portlet.light
+                  .portlet-body
+                    .row
+                      //- TASK LIST
+                      .col-md-5.col-sm-4
+                        .todo-tasklist
+                          .todo-tasklist-item.todo-tasklist-item-border-green
+                            .todo-tasklist-item-title #{tasks[0].title}
+                            .todo-tasklist-item-text #{tasks[0].details}
+                            .todo-tasklist-controls.pull-left
+                              span.todo-tasklist-date
+                                i.fa.fa-calendar
+                                - var due = tasks[0].due
+                                |  #{moment(due).format('MM')}월 #{moment(due).format('DD')}일
 
-
+                      .todo-tasklist-devider
+                      //- TASK CONTENT
+                      .col-md-7.col-sm-8
+                        form.form-horizontal(action='/add', method='POST')
+                          .form
+                            //- TASK TITLE
+                            .form-group
+                              .col-md-12
+                                input.form-control.todo-taskbody-tasktitle(type='text', name='title', placeholder='업무 제목...')
+                            //- TASK DESC
+                            .form-group
+                              .col-md-12
+                                textarea.form-control.todo-taskbody-taskdesc(rows='8', name='details' placeholder='업무에 대한 자세한 설명...')
+                            //- TASK DUE DATE
+                            .form-group
+                              .col-md-12
+                                .input-icon
+                                  i.fa.fa-calendar
+                                  input.form-control.todo-taskbody-due(type='text', name='due' placeholder='업무 기한...')
+                            //- TASK TAGS
+                            .form-group
+                              .col-md-12
+                                select.form-control.todo-taskbody-tags(name='status')
+                                  option(value='대기중') 대기중
+                                  option(value='진행중') 진행중
+                                  option(value='완료됨') 완료됨
+                                  option(value='취소됨') 취소됨
+                            //- TASK ACTION
+                            .form-actions.right.todo-form-actions
+                              button.btn.btn-circle.btn-sm.green 저장하기
+                              button.btn.btn-circle.btn-sm.btn-default 취소하기
     //- FOOTER
     .page-footer
       .page-footer-inner
@@ -105,12 +151,10 @@ html(lang="en")
     //- BEGIN PAGE LEVEL PLUGINS
     script(src='../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js', type='text/javascript')
     script(src='../assets/global/plugins/select2/js/select2.full.min.js', type='text/javascript')
-    script(src='../assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js', type='text/javascript')
     //- THEME GLOBAL SCRIPTS
     script(src='../assets/global/scripts/app.min.js', type='text/javascript')
     //- BEGIN PAGE LEVEL SCRIPTS
-    script(src='../assets/apps/scripts/todo.min.js', type='text/javascript')
-    script(src='../assets/pages/scripts/components-date-time-pickers.min.js', type='text/javascript')
+    script(src='../assets/apps/scripts/todo-2.min.js', type='text/javascript')
     //- BEGIN THEME LAYOUT SCRIPTS
     script(src='../assets/layouts/layout/scripts/layout.min.js', type='text/javascript')
     script(src='../assets/layouts/global/scripts/quick-sidebar.min.js', type='text/javascript')
