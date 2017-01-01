@@ -25,7 +25,7 @@ app.set('view engine', 'pug')
 app.use(bodyParser.json())
 app.locals.pretty = true
 
-app.get('/app_todo', function (req, res) {
+app.get(['/app_todo', '/app_todo:id'], function (req, res) {
   var sql = 'SELECT * FROM tasks'
   connection.query(sql, function(err, rows, fields){
     if (err) throw err
@@ -36,11 +36,13 @@ app.get('/app_todo', function (req, res) {
 app.post('/add', function(req, res){
   var title = req.body.title
   var details = req.body.details
-  var due = req.body.due
+  var due = new Date(req.body.due)
   var status = req.body.status
-
-  console.log(title + details + due + status)
-  res.redirect('/app_todo/')
+  var sql = 'INSERT INTO tasks (title, details, status, due) VALUES(?,?,?,?)'
+  connection.query(sql, [title, details, status, due], function(err, result, fields){
+    if (err) throw err
+    res.redirect('/app_todo?id=' + result.insertId)
+  })
 })
 
 app.listen(3000, function () {
