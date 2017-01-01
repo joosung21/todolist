@@ -93,7 +93,7 @@ html(lang="en")
                         .portlet-body.todo-project-list-content
                           .todo-project-list
                             .nav.nav-stacked
-                              li
+                              li.active
                                 a(href="javascript:;")
                                       span.badge.badge-info 1
                                       | The App Project
@@ -107,7 +107,7 @@ html(lang="en")
                           .col-md-5.col-sm-4
                             .todo-tasklist
                                each val in tasks
-                                 .todo-tasklist-item.todo-tasklist-item-border-green
+                                 .todo-tasklist-item.todo-tasklist-item-border-green(data-id= val.id)
                                     .todo-tasklist-item-title #{val.title}
                                     if val.details.length
                                       .todo-tasklist-item-text #{val.details}
@@ -117,10 +117,41 @@ html(lang="en")
                                             i.fa.fa-calendar
                                             - var due = val.due
                                             |  #{moment(due).format('MM')}월 #{moment(due).format('DD')}일
-
-
                           .todo-tasklist-devider
+
                           //- TASK CONTENT
+                          .col-md-7.col-sm-8
+                            form.form-horizontal(action='/add', method='POST')
+                              .form
+                                //- TASK TITLE
+                                .form-group
+                                  .col-md-12
+                                    input.form-control.todo-taskbody-tasktitle(type='text', name='title', placeholder='업무 제목...', value= tasks[0].title)
+                                //- TASK DESC
+                                .form-group
+                                  .col-md-12
+                                    textarea.form-control.todo-taskbody-taskdesc(rows='8', name='details' placeholder='업무에 대한 자세한 설명...')
+                                      | 여기에 내용을 넣자                                    
+                                //- TASK DUE DATE
+                                .form-group
+                                  .col-md-12
+                                    .input-icon
+                                      i.fa.fa-calendar
+                                      input.form-control.todo-taskbody-due(type='text', name='due' placeholder='업무 기한...')
+                                //- TASK TAGS
+                                .form-group
+                                  .col-md-12
+                                    select.form-control.todo-taskbody-tags(name='status')
+                                      option(value='대기중') 대기중
+                                      option(value='진행중') 진행중
+                                      option(value='완료됨') 완료됨
+                                      option(value='취소됨') 취소됨
+                                //- TASK ACTION
+                                .form-actions.right.todo-form-actions
+                                  button.btn.btn-circle.btn-sm.green 저장하기
+                                  button.btn.btn-circle.btn-sm.btn-default 취소하기
+
+                          //- TASK CONTENT (ADD)
                           .col-md-7.col-sm-8
                             form.form-horizontal(action='/add', method='POST')
                               .form
@@ -176,7 +207,7 @@ html(lang="en")
     //- THEME GLOBAL SCRIPTS
     script(src='../assets/global/scripts/app.min.js', type='text/javascript')
     //- BEGIN PAGE LEVEL SCRIPTS
-    script(src='../assets/apps/scripts/todo-2.min.js', type='text/javascript')
+    script(src='../assets/apps/scripts/todo-2.js', type='text/javascript')
     //- BEGIN THEME LAYOUT SCRIPTS
     script(src='../assets/layouts/layout/scripts/layout.min.js', type='text/javascript')
     script(src='../assets/layouts/global/scripts/quick-sidebar.min.js', type='text/javascript')

@@ -6,7 +6,7 @@ var AppTodo2 = function () {
     // private functions & variables
 
     var _initComponents = function() {
-        
+
         // init datepicker
         $('.todo-taskbody-due').datepicker({
             rtl: App.isRTL(),
@@ -14,7 +14,7 @@ var AppTodo2 = function () {
             autoclose: true
         });
 
-        // init tags        
+        // init tags
         $(".todo-taskbody-tags").select2({
             placeholder: 'Status'
         });
@@ -28,17 +28,22 @@ var AppTodo2 = function () {
         }
     }
 
+    $(".todo-tasklist-item").click(function(){
+        window.location = '/app_todo/' + $(this).data('id')
+    });
+
+
     // public functions
     return {
 
         //main function
         init: function () {
-            _initComponents();     
+            _initComponents();
             _handleProjectListMenu();
 
             App.addResizeHandler(function(){
-                _handleProjectListMenu();    
-            });       
+                _handleProjectListMenu();
+            });
         }
 
     };
