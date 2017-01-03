@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: false })) // Set bodyParser
 app.use(bodyParser.json())                          // Set bodyParser json
 
 // ENTRY OF ToDo APP
-app.get(['/app_todo', '/app_todo/:id'], function (req, res) {
+app.get(['/app_todo/', '/app_todo/:id'], function (req, res) {
   var sql = 'SELECT * FROM tasks'
   connection.query(sql, function(err, rows, fields){
     if (err) throw err
@@ -60,6 +60,15 @@ app.post('/app_todo/:id/edit', function(req, res){
   connection.query(sql, [title, details, due, status, id], function(err, result, fields){
     if (err) throw err
     res.redirect('/app_todo/' + id)
+  })
+})
+
+// DELETE TASK
+app.post('/app_todo/:id/delete', function(req, res){
+  var id = req.params.id
+  var sql = 'DELETE FROM tasks WHERE id=?'
+  connection.query(sql, [id], function(err, result){
+    res.redirect('/app_todo/');
   })
 })
 

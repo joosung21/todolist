@@ -164,6 +164,17 @@ html(lang="en")
                             mixin formUI(postName)
                               form.form-horizontal(action= postName, method='POST')
                                 .form
+                                  //- FORM HEAD
+                                  .form-group
+                                    .col-md-8.col-sm-8
+                                      .todo-taskbody-user
+                                        span.todo-username.pull-left Jay Ahn
+                                        if pageId != 'add'
+                                          button.todo-username-btn.btn.btn-circle.btn-default.btn-sm(type='button') 완료로 처리
+                                    .col-md-4.col-sm-4
+                                      .todo-taskbody-date.pull-right
+                                        if pageId != 'add'
+                                          input.todo-username-btn.btn.btn-circle.btn-default.btn-sm(type='submit', formaction='/app_todo/' + pageId + '/delete/', value='업무삭제') 
                                   //- TASK TITLE
                                   .form-group
                                     .col-md-12
