@@ -101,6 +101,45 @@ html(lang="en")
                   //- ToDo CONTENT
                   .todo-content
                     .portlet.light
+                      - var title
+                      - var details
+                      - var due
+                      - var status
+                      for val in tasks
+                        if val.id == pageId
+                          - title = val.title
+                          - details = val.details
+                          - due = val.due
+                          - status = val.status
+                      //- PROJECT HEAD
+                      .portlet-title
+                        .caption
+                          i.icon-bar-chart.font-green-sharp.hide
+                          span.caption-subject.font-green-sharp.bold.uppercase The App Project
+                        .actions
+                          .btn-group
+                            a.btn.green.btn-circle.btn-sm(href='javascript:;', data-toggle='dropdown', data-hover='dropdown', data-close-others='true')
+                              | 프로젝트 관리
+                              i.fa.fa-angle-down
+                            ul.dropdown-menu.pull-right
+                              li
+                                a(href='/app_todo/add')  새 업무 추가
+                              li.divider
+                              li
+                                a(href='javascript:;')
+                                  | 대기중
+                                  span.badge.badge-danger  4
+                              li
+                                a(href='javascript:;')
+                                  | 진행중
+                                  span.badge.badge-success  12
+                              li
+                                a(href='javascript:;')
+                                  | 완료됨
+                                  span.badge.badge-warning  9
+                              li.divider
+                              li
+                                a(href='javascript:;')  프로젝트 삭제
                       .portlet-body
                         .row
                           //- TASK LIST
@@ -109,7 +148,7 @@ html(lang="en")
                                each val in tasks
                                  .todo-tasklist-item.todo-tasklist-item-border-green(data-id= val.id)
                                     .todo-tasklist-item-title #{val.title}
-                                    if val.details.length
+                                    if val.details
                                       .todo-tasklist-item-text #{val.details}
                                       if val.due
                                         .todo-tasklist-controls.pull-left
@@ -121,66 +160,45 @@ html(lang="en")
 
                           //- TASK CONTENT
                           .col-md-7.col-sm-8
-                            form.form-horizontal(action='/add', method='POST')
-                              .form
-                                //- TASK TITLE
-                                .form-group
-                                  .col-md-12
-                                    input.form-control.todo-taskbody-tasktitle(type='text', name='title', placeholder='업무 제목...', value= tasks[0].title)
-                                //- TASK DESC
-                                .form-group
-                                  .col-md-12
-                                    textarea.form-control.todo-taskbody-taskdesc(rows='8', name='details' placeholder='업무에 대한 자세한 설명...')
-                                      | 여기에 내용을 넣자                                    
-                                //- TASK DUE DATE
-                                .form-group
-                                  .col-md-12
-                                    .input-icon
-                                      i.fa.fa-calendar
-                                      input.form-control.todo-taskbody-due(type='text', name='due' placeholder='업무 기한...')
-                                //- TASK TAGS
-                                .form-group
-                                  .col-md-12
-                                    select.form-control.todo-taskbody-tags(name='status')
-                                      option(value='대기중') 대기중
-                                      option(value='진행중') 진행중
-                                      option(value='완료됨') 완료됨
-                                      option(value='취소됨') 취소됨
-                                //- TASK ACTION
-                                .form-actions.right.todo-form-actions
-                                  button.btn.btn-circle.btn-sm.green 저장하기
-                                  button.btn.btn-circle.btn-sm.btn-default 취소하기
 
-                          //- TASK CONTENT (ADD)
-                          .col-md-7.col-sm-8
-                            form.form-horizontal(action='/add', method='POST')
-                              .form
-                                //- TASK TITLE
-                                .form-group
-                                  .col-md-12
-                                    input.form-control.todo-taskbody-tasktitle(type='text', name='title', placeholder='업무 제목...')
-                                //- TASK DESC
-                                .form-group
-                                  .col-md-12
-                                    textarea.form-control.todo-taskbody-taskdesc(rows='8', name='details' placeholder='업무에 대한 자세한 설명...')
-                                //- TASK DUE DATE
-                                .form-group
-                                  .col-md-12
-                                    .input-icon
-                                      i.fa.fa-calendar
-                                      input.form-control.todo-taskbody-due(type='text', name='due' placeholder='업무 기한...')
-                                //- TASK TAGS
-                                .form-group
-                                  .col-md-12
-                                    select.form-control.todo-taskbody-tags(name='status')
-                                      option(value='대기중') 대기중
-                                      option(value='진행중') 진행중
-                                      option(value='완료됨') 완료됨
-                                      option(value='취소됨') 취소됨
-                                //- TASK ACTION
-                                .form-actions.right.todo-form-actions
-                                  button.btn.btn-circle.btn-sm.green 저장하기
-                                  button.btn.btn-circle.btn-sm.btn-default 취소하기
+                            mixin formUI(postName)
+                              form.form-horizontal(action= postName, method='POST')
+                                .form
+                                  //- TASK TITLE
+                                  .form-group
+                                    .col-md-12
+                                      input.form-control.todo-taskbody-tasktitle(type='text', name='title', placeholder='업무 제목...', value= title)
+                                  //- TASK DESC
+                                  .form-group
+                                    .col-md-12
+                                      textarea.form-control.todo-taskbody-taskdesc(rows='8', name='details' placeholder='업무에 대한 자세한 설명...')
+                                        = details
+                                  //- TASK DUE DATE
+                                  .form-group
+                                    .col-md-12
+                                      .input-icon
+                                        i.fa.fa-calendar
+                                        if due
+                                          input.form-control.todo-taskbody-due(type='text', name='due' placeholder='업무 기한...', value= moment(due).format('MM/DD/YYYY'))
+                                        else
+                                          input.form-control.todo-taskbody-due(type='text', name='due' placeholder='업무 기한...')
+                                            //- #{moment(due).format('MM/DD/YYYY')}
+                                  //- TASK TAGS
+                                  .form-group
+                                    .col-md-12
+                                      select.form-control.todo-taskbody-tags(name='status')
+                                        option(value='대기중') 대기중
+                                        option(value='진행중') 진행중
+                                        option(value='완료됨') 완료됨
+                                        option(value='취소됨') 취소됨
+                                  //- TASK ACTION
+                                  .form-actions.right.todo-form-actions
+                                    button.btn.btn-circle.btn-sm.green 저장하기
+                                    button.btn.btn-circle.btn-sm.btn-default 취소하기
+                            if pageId == 'add'
+                              + formUI('/app_todo/add')
+                            else
+                              + formUI('/app_todo/' + pageId + '/edit')
     //- FOOTER
     .page-footer
       .page-footer-inner

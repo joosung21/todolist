@@ -26,18 +26,18 @@ app.use(bodyParser.json())                          // Set bodyParser json
 
 // ENTRY OF ToDo APP
 app.get(['/app_todo', '/app_todo/:id'], function (req, res) {
-  var id = req.params.id
   var sql = 'SELECT * FROM tasks'
   connection.query(sql, function(err, rows, fields){
     if (err) throw err
     res.render('todo', {
-      tasks: rows
+      tasks: rows,
+      pageId: req.params.id
     })
   })
 })
 
 // ADD A TASK
-app.post('/add', function(req, res){
+app.post('/app_todo/add', function(req, res){
   var title = req.body.title
   var details = req.body.details
   var due = new Date(req.body.due)
@@ -46,6 +46,20 @@ app.post('/add', function(req, res){
   connection.query(sql, [title, details, status, due], function(err, result, fields){
     if (err) throw err
     res.redirect('/app_todo?taskId=' + result.insertId)
+  })
+})
+
+// EDIT TASK
+app.post('/app_todo/:id/edit', function(req, res){
+  var title = req.body.title
+  var details = req.body.details
+  var due = new Date(req.body.due)
+  var status = req.body.status
+  var id = req.params.id
+  var sql = 'UPDATE tasks SET title=?, details=?, due=?, status=? WHERE id=?'
+  connection.query(sql, [title, details, due, status, id], function(err, result, fields){
+    if (err) throw err
+    res.redirect('/app_todo/' + id)
   })
 })
 
